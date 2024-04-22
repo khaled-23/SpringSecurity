@@ -19,7 +19,7 @@ public class AuthService {
 
 
     public void register(User user){
-        user.setRole("ADMIN");
+        user.setRole("CUSTOMER");
         String hashPassword = new BCryptPasswordEncoder().encode(user.getPassword());
         user.setPassword(hashPassword);
         authRepository.save(user);
@@ -51,6 +51,7 @@ public class AuthService {
         authRepository.save(u);
     }
 
+
     public void login(LoginDTO loginDTO){
 //        User user = (User) myUserDetailsService.loadUserByUsername(loginDTO.getUsername());
 //        if(!new BCryptPasswordEncoder().matches(loginDTO.getPassword(), user.getPassword())){
@@ -58,6 +59,5 @@ public class AuthService {
 //        }
     }
     public void logout(){
-
     }
 }

@@ -34,8 +34,6 @@ public class AuthController {
         return ResponseEntity.ok(new ApiResponse("user updated"));
     }
 
-    //login logout crud
-
     @DeleteMapping("/user/delete/{username}")
     public ResponseEntity deleteUser(@PathVariable String username){
         authService.deleteUser(username);

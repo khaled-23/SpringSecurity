@@ -9,4 +9,6 @@ public interface AuthRepository extends JpaRepository<User,Integer> {
 
     User findUsersByUsername(String username);
 
+    User findUserById(Integer userId);
+
 }

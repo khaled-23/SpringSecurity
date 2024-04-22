@@ -22,7 +22,6 @@ public class SecurityConfig {
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider(){
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-
         daoAuthenticationProvider.setUserDetailsService(myUserDetailsService); //username
         daoAuthenticationProvider.setPasswordEncoder(new BCryptPasswordEncoder());
 
@@ -39,8 +38,9 @@ public class SecurityConfig {
                 .authenticationProvider(daoAuthenticationProvider())
                 .authorizeHttpRequests()
                 .requestMatchers("/api/v1/auth/register","/api/v1/auth/login").permitAll()
-                .requestMatchers("/api/v1/auth/users","/api/v1/auth/user/delete/{username}").hasAuthority("ADMIN")
+                .requestMatchers("/api/v1/auth/users","/api/v1/auth/user/delete/{username}","api/v1/todo/todos").hasAuthority("ADMIN")
                 .requestMatchers("/api/v1/auth/user/update/{username}").hasAnyAuthority("ADMIN","CUSTOMER")
+                .requestMatchers("api/v1/todo/user-todos", "api/v1/todo/add","api/v1/todo/update/{todo_id}","/api/v1/todo/delete/{todo_id}").hasAuthority("CUSTOMER")
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();
